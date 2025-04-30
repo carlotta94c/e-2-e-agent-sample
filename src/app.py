@@ -59,10 +59,7 @@ functions = AsyncFunctionTool(
     }
 )
 
-#INSTRUCTIONS_FILE = "instructions/instructions_function_calling.txt"
-#INSTRUCTIONS_FILE = "instructions/instructions_code_interpreter.txt"
-#INSTRUCTIONS_FILE = "instructions/instructions_file_search.txt"
-INSTRUCTIONS_FILE = "instructions/instructions_bing_grounding.txt"
+INSTRUCTIONS_FILE = "instructions.txt"
 
 
 async def add_agent_tools():
