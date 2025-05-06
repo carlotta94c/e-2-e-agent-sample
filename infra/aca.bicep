@@ -1,6 +1,7 @@
 param name string
 param location string = resourceGroup().location
 param tags object = {}
+param bingConnectionName string = 'groundingwithbingsearch'
 
 param identityName string
 param containerAppsEnvironmentName string
@@ -8,15 +9,10 @@ param containerRegistryName string
 param serviceName string = 'aca'
 param exists bool
 param openAiDeploymentName string
-param openAiEndpoint string
-param allowedOrigins string = '' // comma separated list of allowed origins - no slash at the end!
 @secure()
 param chainlitAuthSecret string
 @secure()
-param literalApiKey string = ''
-param azureOpenAiApiVersion string = '2024-05-01-preview'
-param assistantId string
-param openAiApiKey string
+param projectConnectionString string
 @secure()
 param userPassword string
 
@@ -45,49 +41,37 @@ module app 'core/host/container-app-upsert.bicep' = {
         value: openAiDeploymentName
       }
       {
-        name: 'azure-openai-endpoint'
-        value: openAiEndpoint
-      }
-      {
-        name: 'openai-api-key'
-        value: openAiApiKey
+        name: 'project-connection-string'
+        value: projectConnectionString
       }
       {
         name: 'chainlit-auth-secret'
         value: chainlitAuthSecret
       }
       {
-        name: 'literal-api-key'
-        value: literalApiKey
-      }
-      {
         name: 'user-password'
         value: userPassword
+      }
+      {
+        name: 'bing-connection-name'
+        value: bingConnectionName
       }
     ]
     env: [
       {
-        name: 'AZURE_OPENAI_DEPLOYMENT'
+        name: 'MODEL_DEPLOYMENT_NAME'
         secretRef: 'azure-openai-deployment'
       }
       {
-        name: 'AZURE_OPENAI_ENDPOINT'
-        secretRef: 'azure-openai-endpoint'
-      }
-      {
-        name: 'AZURE_OPENAI_API_KEY'
-        secretRef: 'openai-api-key'
+        name: 'PROJECT_CONNECTION_STRING'
+        secretRef: 'project-connection-string'
       }
       {
         name: 'CHAINLIT_AUTH_SECRET'
         secretRef: 'chainlit-auth-secret'
       }
       {
-        name: 'LITERAL_API_KEY'
-        secretRef: 'literal-api-key'
-      }
-      {
-        name: 'ASSISTANT_PASSWORD'
+        name: 'AGENT_PASSWORD'
         secretRef: 'user-password'
       }
       {
@@ -95,19 +79,11 @@ module app 'core/host/container-app-upsert.bicep' = {
         value: 'production'
       }
       {
-        name: 'ALLOWED_ORIGINS'
-        value: allowedOrigins
-      }
-      {
-        name: 'AZURE_OPENAI_API_VERSION'
-        value: azureOpenAiApiVersion
-      }
-      {
-        name: 'AZURE_OPENAI_ASSISTANT_ID'
-        value: assistantId
+        name: 'BING_CONNECTION_NAME'
+        secretRef: 'bing-connection-name'
       }
     ]
-    targetPort: 80
+    targetPort: 8080
   }
 }
 

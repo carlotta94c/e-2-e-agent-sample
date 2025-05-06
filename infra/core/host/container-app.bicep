@@ -17,7 +17,7 @@ param secrets array = []
 param env array = []
 param external bool = true
 param imageName string
-param targetPort int = 80
+param targetPort int = 8080
 
 @description('User assigned identity name')
 param identityName string

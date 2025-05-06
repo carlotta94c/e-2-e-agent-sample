@@ -16,7 +16,7 @@ param containerMaxReplicas int = 10
 param secrets array = []
 param env array = []
 param external bool = true
-param targetPort int = 80
+param targetPort int = 8080
 param exists bool
 
 @description('User assigned identity name')

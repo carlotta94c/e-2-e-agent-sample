@@ -18,12 +18,17 @@ param aiProjectDescription string
 @description('Resource ID of the AI Hub resource')
 param aiHubId string
 
+var subscriptionId = subscription().subscriptionId
+var resourceGroupName = resourceGroup().name
+var projectConnectionString = '${location}.api.azureml.ms;${subscriptionId};${resourceGroupName};${aiProjectName}'
 
 
 resource aiProject 'Microsoft.MachineLearningServices/workspaces@2024-10-01' = {
   name: aiProjectName
   location: location
-  tags: tags
+  tags: union(tags, {
+    ProjectConnectionString: projectConnectionString
+  })
   identity: {
     type: 'SystemAssigned'
   }
@@ -40,3 +45,4 @@ resource aiProject 'Microsoft.MachineLearningServices/workspaces@2024-10-01' = {
 }
 
 output aiProjectID string = aiProject.id
+output aiProjectConnectionString string = aiProject.tags.projectConnectionString

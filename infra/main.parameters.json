@@ -3,28 +3,28 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "aiHubName": {
-      "value": "standard-hub"
+      "value": "agent-sample"
     },
     "aiProjectName": {
-      "value": "standard-project"
+      "value": "agent-project"
     }, 
     "modelName": {
-      "value": "gpt-4o-mini"
+      "value": "gpt-4o"
     },
     "modelFormat": {
       "value": "OpenAI"
     },
     "modelVersion": {
-      "value": "2024-07-18"
+      "value": "2024-11-20"
     },
     "modelSkuName": {
       "value": "GlobalStandard"
     },
     "modelCapacity": {
-      "value": 50
+      "value": 140
     },
     "modelLocation": {
-      "value": "eastus"
+      "value": "westus"
     },
     "storageName": {
       "value": "agent-storage"
@@ -37,6 +37,21 @@
     },
     "aiServiceKind": {
       "value": "AIServices"
-    }
+    },
+    "principalId": {
+        "value": "${AZURE_PRINCIPAL_ID}"
+      },
+    "chainlitAuthSecret": {
+        "value": "${CHAINLIT_AUTH_SECRET}"
+      },
+      "location": {
+        "value": "${AZURE_LOCATION}"
+      },
+      "envName": {
+        "value": "${AZURE_ENV_NAME}"
+      },
+      "bingConnectionName": {
+        "value": "groundingwithbingsearch"
+      }
   }
 }
