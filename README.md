@@ -8,7 +8,7 @@ Imagine you are a sales manager at Contoso, a multinational retail company that 
 
 The Contoso Sales Assistant is a conversational agent that can answer questions about sales data, generate charts, and create Excel files for further analysis.
 
-The app is built with [Azure OpenAI GPT-4o](https://learn.microsoft.com/azure/ai-services/openai/concepts/models) , the [Azure AI Agent Service](https://learn.microsoft.com/en-us/azure/ai-services/agents/) and the [Chainlit](https://docs.chainlit.io/){:target="_blank"}  Conversational AI  web framework.
+The app is built with [Azure OpenAI GPT-4o](https://learn.microsoft.com/azure/ai-services/openai/concepts/models) , the [Azure AI Agent Service](https://learn.microsoft.com/en-us/azure/ai-services/agents/) and the [Chainlit](https://docs.chainlit.io/) Conversational AI  web framework.
 
 The app uses a read-only SQLite Contoso Sales Database with 40,000 rows of synthetic data. When the app starts, it reads the sales database schema, product categories, product types, and reporting years, then adds this info to the Azure OpenAI Assistants API instruction context.
 
@@ -75,6 +75,11 @@ The script `deploy.sh` deploys to the `eastus2` region by default; edit the file
 ```bash
 cd infra && ./deploy.sh
 ```
+> !NOTE
+> If you don't have permissions to execute the .sh script, make sure to change permissions before running it, by using:
+> ```bash
+> chmod +x ./deploy.sh
+> ```
 
 ## Run the app locally
 1. Open the terminal in your Codespace you used for authentication and run the following command to create a Chainlit Auth Secret - which is used to authenticate with the Chainlit api:
